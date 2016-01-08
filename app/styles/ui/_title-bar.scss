@@ -1,0 +1,10 @@
+.title-bar {
+  @include position(absolute, 0 0 auto 0);
+  height: 44px;
+  border-bottom: 1px solid #ccc;
+  font-size: 1.6rem;
+  line-height: 44px;
+  text-align: center;
+  background: #f6f6f6;
+  @include ellipsis;
+}

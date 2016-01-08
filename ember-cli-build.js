@@ -8,6 +8,9 @@ module.exports = function(defaults) {
     sourcemaps: {
       enabled: true,
       extensions: ['js']
+    },
+    babel: {
+      optional: ['es7.decorators']
     }
   });
 

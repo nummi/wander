@@ -17,6 +17,7 @@
   "validthis": true,
 
   "predef": [
+    "server",
     "document",
     "window",
     "-Promise",

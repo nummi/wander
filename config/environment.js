@@ -26,6 +26,15 @@ module.exports = function(environment) {
       'img-src': "'self'",
       'style-src': "'self' 'unsafe-inline'", // Allow inline styles
       'media-src': "'self'"
+    },
+
+    foursquare: {
+      clientId: 'JIVBLDT2LB0JJWNRAZNOE42B4VDRWB0KGADJPCGRHLIUJKVZ',
+      clientSecret: 'DZGYBBUYTEKITZMFL4CUC0V5F0DZJ4L3KPLPST1VOERUOYBS'
+    },
+
+    'ember-cli-mirage': {
+      enabled: false
     }
   };
 
@@ -44,7 +53,11 @@ module.exports = function(environment) {
   if (environment === 'test') {
     // Testem prefers this...
     ENV.baseURL = '/';
-    ENV.locationType = 'auto';
+    ENV.locationType = 'none';
+
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    };
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;

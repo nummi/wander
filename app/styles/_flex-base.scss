@@ -11,7 +11,14 @@
 .flex-element {
   @include flex(10 10 auto);
 
-  input[type=text] { width: 100%; }
+  input[type=date],
+  input[type=email]
+  input[type=number],
+  input[type=password],
+  input[type=search],
+  input[type=tel],
+  input[type=text],
+  input[type=time],
   select { width: 100%; }
 }
 

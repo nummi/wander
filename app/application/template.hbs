@@ -1,0 +1,29 @@
+{{outlet}}
+
+{{#geo-location as |coords|}}
+  {{#venue-list latitude=coords.latitude
+                longitude=coords.longitude
+                as |data|}}
+    <h1 class="title-bar">Locations Near {{data.headerLocation}}</h1>
+    <div class="table-view">
+      <div class="table-view-item table-view-item--search flex-group">
+        <div class="flex-element">
+          <input type="text" placeholder="find a place">
+        </div>
+      </div>
+      {{#each data.venues as |venue|}}
+        <div class="table-view-item">
+          <div class="table-view-item-text-label">{{venue.name}}</div>
+          <div class="table-view-item-text-label-detail">{{venue.location.distance}} ft</div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <h1 class="title-bar">Fetching Locations</h1>
+  {{/venue-list}}
+{{else}}
+  <h1 class="title-bar">Fetching Locations</h1>
+  <div class="table-view">
+    {{loading-spinner}}
+  </div>
+{{/geo-location}}

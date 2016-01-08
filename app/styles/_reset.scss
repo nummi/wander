@@ -21,6 +21,7 @@ time, mark, audio, video {
 
 html {
   box-sizing: border-box;
+  font-size: 62.5%;
 }
 
 *, *:before, *:after {
@@ -28,8 +29,8 @@ html {
 }
 
 body {
-  line-height: 1;
   font-family: helvetica, arial, sans-serif;
+  line-height: 1;
 }
 
 article,aside,details,figcaption,figure,
