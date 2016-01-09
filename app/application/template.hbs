@@ -3,12 +3,12 @@
 {{#geo-location as |coords|}}
   {{#venue-list latitude=coords.latitude
                 longitude=coords.longitude
-                as |data|}}
+                as |data search|}}
     <h1 class="title-bar">Locations Near {{data.headerLocation}}</h1>
     <div class="table-view">
       <div class="table-view-item table-view-item--search flex-group">
         <div class="flex-element">
-          <input type="text" placeholder="find a place">
+          {{input value="" action=search placeholder="find a place"}}
         </div>
       </div>
       {{#each data.venues as |venue|}}

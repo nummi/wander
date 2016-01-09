@@ -1,5 +1,6 @@
 export default {
   "response": {
+    "headerLocation": "Columbus Downtown",
     "venues": [
       {
         "id": "4b0a9f9cf964a520b22523e3",

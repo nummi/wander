@@ -41,21 +41,21 @@ export default Ember.Service.extend({
     //   return newResponse;
     // };
 
-    return Ember.RSVP.resolve(payload.response);
-    // const defaults = this.generateDefaultAjaxOptions();
+    //return Ember.RSVP.resolve(payload.response);
+    const defaults = this.generateDefaultAjaxOptions();
 
-    // let data = {
-    //   ll: lat + ',' + lng
-    // };
+    let data = {
+      ll: lat + ',' + lng
+    };
 
-    // if(!isEmpty(name)) {
-    //   data.query = name;
-    // }
+    if(!isEmpty(name)) {
+      data.query = name;
+    }
 
-    // return this.get('ajax').request(urls.VENUES_SEARCH, {
-    //   data: _.assign(defaults, data)
-    // }).then(payload => {
-    //   return payload.response;
-    // });
+    return this.get('ajax').request(urls.VENUES_SEARCH, {
+      data: _.assign(defaults, data)
+    }).then(payload => {
+      return payload.response;
+    });
   }
 });
