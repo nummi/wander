@@ -1,0 +1,14 @@
+<div {{action "showSelectVenue"}}>Choose a venue</div>
+
+{{#each model as |event|}}
+  {{event.title}}<br>
+{{/each}}
+
+<h1>{{selectedVenue.name}}</h1>
+
+{{#if selectVenue}}
+  {{#ember-wormhole to="wormhole-target"}}
+    {{select-venue close=(action "hideSelectVenue")
+                   selectVenue=(action "getVenue")}}
+  {{/ember-wormhole}}
+{{/if}}
