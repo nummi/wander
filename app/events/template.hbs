@@ -1,14 +1,13 @@
-<div {{action "showSelectVenue"}}>Choose a venue</div>
+<div class="title-bar">
+  {{#link-to "events-new" class="title-bar-button"}}
+    {{partial "svg/plus"}}
+  {{/link-to}}
+</div>
 
-{{#each model as |event|}}
-  {{event.title}}<br>
-{{/each}}
-
-<h1>{{selectedVenue.name}}</h1>
-
-{{#if selectVenue}}
-  {{#ember-wormhole to="wormhole-target"}}
-    {{select-venue close=(action "hideSelectVenue")
-                   selectVenue=(action "getVenue")}}
-  {{/ember-wormhole}}
-{{/if}}
+<!-- 
+<div class="scroll-view below-title-bar">
+  {{#each model as |event|}}
+    {{event.title}}<br>
+  {{/each}}
+</div>
+-->

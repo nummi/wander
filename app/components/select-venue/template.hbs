@@ -1,40 +1,41 @@
-{{#geo-location as |coords|}}
-  {{#load-venue-list latitude=coords.latitude
-                     longitude=coords.longitude
-                     as |data search|}}
-    <div class="title-bar">
-      <div class="title-bar-button" {{action "close"}}>Cancel</div>
-      <div class="title-bar-text">Locations Near {{data.headerLocation}}</div>
-      <div></div>
-    </div>
-
-    <div class="table-view animation-fade-in">
-      <div class="table-view-item table-view-item--search flex-group">
-        <div class="flex-element">
-          {{input value="" enter="undefined" action=search placeholder="find a place"}}
-        </div>
+<div class="screen-view">
+  {{#geo-location as |coords|}}
+    {{#load-venue-list latitude=coords.latitude
+                       longitude=coords.longitude
+                       as |data search|}}
+      <div class="title-bar">
+        <div class="title-bar-button" {{action "close"}}>Cancel</div>
+        <div class="title-bar-text">Locations Near {{data.headerLocation}}</div>
       </div>
-      {{#each data.venues as |venue|}}
-        <div class="table-view-item" {{action "selectVenue" venue}}>
-          <div class="table-view-item-text-label">{{venue.name}}</div>
-          <div class="table-view-item-text-label-detail">{{venue.location.distance}} ft</div>
+
+      <div class="table-view scroll-view below-title-bar animation-fade-in">
+        <div class="table-view-item table-view-item--search flex-group">
+          <div class="flex-element">
+            {{input value="" enter="undefined" action=search placeholder="find a place"}}
+          </div>
         </div>
-      {{/each}}
-    </div>
+        {{#each data.venues as |venue|}}
+          <div class="table-view-item" {{action "selectVenue" venue}}>
+            <div class="table-view-item-text-label">{{venue.name}}</div>
+            <div class="table-view-item-text-label-detail">{{venue.location.distance}} ft</div>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <div class="title-bar">
+        <div class="title-bar-button">Cancel</div>
+        <div class="title-bar-text">Locations Near {{data.headerLocation}}</div>
+        <div></div>
+      </div>
+    {{/load-venue-list}}
   {{else}}
     <div class="title-bar">
       <div class="title-bar-button">Cancel</div>
       <div class="title-bar-text">Locations Near {{data.headerLocation}}</div>
       <div></div>
     </div>
-  {{/load-venue-list}}
-{{else}}
-  <div class="title-bar">
-    <div class="title-bar-button">Cancel</div>
-    <div class="title-bar-text">Locations Near {{data.headerLocation}}</div>
-    <div></div>
-  </div>
-  <div class="table-view">
-    {{loading-spinner}}
-  </div>
-{{/geo-location}}
+    <div class="table-view">
+      {{loading-spinner}}
+    </div>
+  {{/geo-location}}
+</div>

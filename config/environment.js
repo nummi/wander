@@ -33,6 +33,10 @@ module.exports = function(environment) {
       clientSecret: 'DZGYBBUYTEKITZMFL4CUC0V5F0DZJ4L3KPLPST1VOERUOYBS'
     },
 
+    worldWeatherOnline: {
+      key: '4bb4eba8c8e3e0eca68cf4698bb0e'
+    },
+
     'ember-cli-mirage': {
       enabled: false
     }

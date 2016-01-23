@@ -1,7 +1,6 @@
 .table-view {
   list-style-type: none;
   overflow: auto;
-  @include position(absolute, 44px 0 0 0);
 }
 
 .table-view-item {

@@ -41,7 +41,7 @@ export default Ember.Service.extend({
     //   return newResponse;
     // };
 
-    //return Ember.RSVP.resolve(payload.response);
+    return Ember.RSVP.resolve(payload.response);
     const defaults = this.generateDefaultAjaxOptions();
 
     let data = {

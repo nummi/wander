@@ -1,9 +1,41 @@
+$title-bar-height: 44px;
+
 @import 'bourbon/bourbon';
 
 @import 'reset';
 @import 'z-index';
+@import 'colors';
 
 @import 'flex-base';
 @import 'animations/base';
 @import 'components/base';
 @import 'ui/base';
+
+
+// Modifiers ------------
+
+.below-title-bar {
+  top: $title-bar-height;
+}
+
+dl {
+  padding-top: 1rem;
+}
+
+dt {
+  display: inline;
+  padding-right: 0.5rem;
+  color: $ios-blue;
+  font-size: 1.5rem;
+}
+
+dd {
+  font-size: 1.5rem;
+  display: inline;
+
+  &:after {
+    content: '';
+    display: block;
+    margin-bottom: 7px;
+  }
+}

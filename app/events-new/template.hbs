@@ -1,0 +1,49 @@
+<div class="title-bar">
+  {{link-to "Cancel" "events" class="title-bar-button"}}
+  <div class="title-bar-text">New Event</div>
+</div>
+
+<div class="scroll-view below-title-bar">
+  {{#geo-location as |coords|}}
+    <div style="padding: 0 20px;">
+      <br>
+      <h1 class="section-title">Weather</h1>
+      {{#weather-fetch latitude=coords.latitude
+                       longitude=coords.longitude
+                       as |data|}}
+        <dl>
+          <dt>Temperature:</dt>
+          <dd>{{data.temp_F}}F, feels like {{data.FeelsLikeF}}F</dd>
+          <dt>Windspeed:</dt> <dd>{{data.windspeedMiles}}mph</dd>
+          <dt>Humidity:</dt> <dd>{{data.humidity}}%</dd>
+          <dt>Cloud cover:</dt>
+          <dd>
+            {{data.cloudcover}}% &ndash;
+            {{#each data.weatherDesc as |desc|}}
+              {{desc.value}}
+            {{/each}}
+          </dd>
+        </dl>
+      {{/weather-fetch}}
+
+      <br><br>
+      <h1 class="section-title">Location</h1>
+      <dl>
+        <dt>Latitude</dt> <dd>{{coords.latitude}}</dd>
+        <dt>Longitude</dt> <dd>{{coords.longitude}}</dd>
+      {{#if selectedVenue}}
+        <dt>Location name</dt> <dd>{{selectedVenue.name}}</dd>
+      {{/if}}
+      </dl>
+
+      <button {{action "showSelectVenue"}}>Select Location Name</button>
+    </div>
+  {{/geo-location}}
+</div>
+
+{{#if selectVenue}}
+  {{#ember-wormhole to="wormhole-target"}}
+    {{select-venue close=(action "hideSelectVenue")
+                   selectVenue=(action "chooseVenue")}}
+  {{/ember-wormhole}}
+{{/if}}
