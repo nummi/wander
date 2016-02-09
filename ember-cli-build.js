@@ -1,3 +1,5 @@
+/*jshint node:true*/
+/* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
@@ -12,6 +14,7 @@ module.exports = function(defaults) {
     babel: {
       optional: ['es7.decorators']
     }
+    // Add options here
   });
 
   app.import(app.bowerDirectory + '/moment/moment.js');
