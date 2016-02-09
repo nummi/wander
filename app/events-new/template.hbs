@@ -1,49 +1,61 @@
-<div class="title-bar">
-  {{link-to "Cancel" "events" class="title-bar-button"}}
-  <div class="title-bar-text">New Event</div>
-</div>
+<div class="screen-view events-new-screen">
+  <div class="title-bar">
+    {{link-to "Cancel" "events" class="title-bar-button"}}
+    <div class="title-bar-text">New Event</div>
+  </div>
 
-<div class="scroll-view below-title-bar">
-  {{#geo-location as |coords|}}
+  <div class="scroll-view below-title-bar">
     <div style="padding: 0 20px;">
-      <br>
-      <h1 class="section-title">Weather</h1>
-      {{#weather-fetch latitude=coords.latitude
-                       longitude=coords.longitude
-                       as |data|}}
-        <dl>
-          <dt>Temperature:</dt>
-          <dd>{{data.temp_F}}F, feels like {{data.FeelsLikeF}}F</dd>
-          <dt>Windspeed:</dt> <dd>{{data.windspeedMiles}}mph</dd>
-          <dt>Humidity:</dt> <dd>{{data.humidity}}%</dd>
-          <dt>Cloud cover:</dt>
-          <dd>
-            {{data.cloudcover}}% &ndash;
-            {{#each data.weatherDesc as |desc|}}
-              {{desc.value}}
-            {{/each}}
-          </dd>
-        </dl>
-      {{/weather-fetch}}
+      <h1 class="section-title">Description</h1>
+      <textarea></textarea>
 
       <br><br>
-      <h1 class="section-title">Location</h1>
-      <dl>
-        <dt>Latitude</dt> <dd>{{coords.latitude}}</dd>
-        <dt>Longitude</dt> <dd>{{coords.longitude}}</dd>
-      {{#if selectedVenue}}
-        <dt>Location name</dt> <dd>{{selectedVenue.name}}</dd>
-      {{/if}}
-      </dl>
+      <h1 class="section-title">Cost</h1>
+      <input type="text">
+      {{#geo-location as |coords|}}
+        <br>
+        <h1 class="section-title">Weather</h1>
+        {{#weather-fetch latitude=coords.latitude
+                         longitude=coords.longitude
+                         as |data|}}
+          <dl>
+            <dt>Temperature:</dt>
+            <dd>{{data.temp_F}}F, feels like {{data.FeelsLikeF}}F</dd>
+            <dt>Windspeed:</dt> <dd>{{data.windspeedMiles}}mph</dd>
+            <dt>Humidity:</dt> <dd>{{data.humidity}}%</dd>
+            <dt>Cloud cover:</dt>
+            <dd>
+              {{data.cloudcover}}% &ndash;
+              {{#each data.weatherDesc as |desc|}}
+                {{desc.value}}
+              {{/each}}
+            </dd>
+          </dl>
+        {{else}}
+          Loading weather...
+        {{/weather-fetch}}
 
-      <button {{action "showSelectVenue"}}>Select Location Name</button>
+        <br><br>
+        <h1 class="section-title">Location</h1>
+        <dl>
+          <dt>Latitude</dt> <dd>{{coords.latitude}}</dd>
+          <dt>Longitude</dt> <dd>{{coords.longitude}}</dd>
+        {{#if selectedVenue}}
+          <dt>Location name</dt> <dd>{{selectedVenue.name}}</dd>
+        {{/if}}
+        </dl>
+
+        <button {{action "showSelectVenue"}}>Select Location Name</button>
+      {{else}}
+        Getting location...
+      {{/geo-location}}
     </div>
-  {{/geo-location}}
-</div>
+  </div>
 
-{{#if selectVenue}}
-  {{#ember-wormhole to="wormhole-target"}}
-    {{select-venue close=(action "hideSelectVenue")
-                   selectVenue=(action "chooseVenue")}}
-  {{/ember-wormhole}}
-{{/if}}
+  {{#if selectVenue}}
+    {{#ember-wormhole to="wormhole-target"}}
+      {{select-venue close=(action "hideSelectVenue")
+                     selectVenue=(action "chooseVenue")}}
+    {{/ember-wormhole}}
+  {{/if}}
+</div>

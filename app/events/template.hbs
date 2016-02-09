@@ -4,10 +4,30 @@
   {{/link-to}}
 </div>
 
-<!-- 
 <div class="scroll-view below-title-bar">
   {{#each model as |event|}}
-    {{event.title}}<br>
+    <br>
+    {{#if event.venue}}
+      {{event.venue}}<br>
+    {{/if}}
+
+    {{#if event.cost}}
+      ${{event.cost}}<br>
+    {{/if}}
+
+    {{#if event.description}}
+      {{event.description}}<br>
+    {{/if}}
+
+    {{#if event.weather.temp_F}}
+      {{event.weather.temp_F}}F
+    {{/if}}
+
+    {{#if event.weather.weatherDesc}}
+      {{#each event.weather.weatherDesc as |desc|}}
+        {{desc.value}}
+      {{/each}}
+    {{/if}}
+    <br><br><hr>
   {{/each}}
 </div>
--->
