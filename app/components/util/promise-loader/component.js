@@ -1,13 +1,14 @@
 import Ember from 'ember';
-import DS from 'ember-data';
 
 const { computed } = Ember;
+
+const PromiseObject = Ember.ObjectProxy.extend(Ember.PromiseProxyMixin);
 
 export default Ember.Component.extend({
   promise: null,
 
   promiseProxy: computed('promise', function() {
-    return DS.PromiseObject.create({
+    return PromiseObject.create({
       promise: Ember.RSVP.resolve(this.get('promise'))
     });
   }),
