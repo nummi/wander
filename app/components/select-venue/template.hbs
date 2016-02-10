@@ -5,7 +5,7 @@
                        as |data search|}}
       <div class="title-bar">
         <div class="title-bar-button" {{action "close"}}>Cancel</div>
-        <div class="title-bar-text">Locations Near {{data.headerLocation}}</div>
+        <div class="title-bar-text">{{data.headerLocation}}</div>
       </div>
 
       <div class="table-view scroll-view below-title-bar animation-fade-in">
@@ -19,19 +19,21 @@
             <div class="table-view-item-text-label">{{venue.name}}</div>
             <div class="table-view-item-text-label-detail">{{venue.location.distance}} ft</div>
           </div>
+        {{else}}
+          No locations found
         {{/each}}
       </div>
     {{else}}
       <div class="title-bar">
         <div class="title-bar-button">Cancel</div>
-        <div class="title-bar-text">Locations Near {{data.headerLocation}}</div>
+        <div class="title-bar-text">Error loading locations</div>
         <div></div>
       </div>
     {{/load-venue-list}}
   {{else}}
     <div class="title-bar">
       <div class="title-bar-button">Cancel</div>
-      <div class="title-bar-text">Locations Near {{data.headerLocation}}</div>
+      <div class="title-bar-text">Loading...</div>
       <div></div>
     </div>
     <div class="table-view">
