@@ -1,5 +1,6 @@
 .title-bar {
   @include position(absolute, 0 0 auto 0);
+  @include justify-content(space-between);
   display: flex;
   height: $title-bar-height;
   border-bottom: 1px solid #ccc;
@@ -35,4 +36,8 @@
       fill: $ios-blue;
     }
   }
+}
+
+.title-bar-button--default {
+  font-weight: bold;
 }

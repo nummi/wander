@@ -1,32 +1,38 @@
 <div class="screen-view events-new-screen">
   <div class="title-bar">
     {{link-to "Cancel" "events" class="title-bar-button"}}
+
     <div class="title-bar-text">New Event</div>
+
+    <span class="title-bar-button title-bar-button--default" {{action "save"}}>
+      Save
+    </span>
   </div>
 
   <div class="scroll-view below-title-bar">
     <div style="padding: 0 20px;">
       <h1 class="section-title">Description</h1>
-      <textarea></textarea>
+      {{textarea value=model.description}}
 
       <br><br>
       <h1 class="section-title">Cost</h1>
-      <input type="text">
-      {{#geo-location as |coords|}}
+      {{input value=model.cost}}
+
+      {{#geo-location success=(action "geoLocationSuccess")}}
         <br>
         <h1 class="section-title">Weather</h1>
-        {{#weather-fetch latitude=coords.latitude
-                         longitude=coords.longitude
-                         as |data|}}
+        {{#weather-fetch latitude=model.geolocation.latitude
+                         longitude=model.geolocation.longitude
+                         success=(action "weatherSuccess")}}
           <dl>
             <dt>Temperature:</dt>
-            <dd>{{data.temp_F}}F, feels like {{data.FeelsLikeF}}F</dd>
-            <dt>Windspeed:</dt> <dd>{{data.windspeedMiles}}mph</dd>
-            <dt>Humidity:</dt> <dd>{{data.humidity}}%</dd>
+            <dd>{{model.weather.temp_F}}F, feels like {{model.weather.FeelsLikeF}}F</dd>
+            <dt>Windspeed:</dt> <dd>{{model.weather.windspeedMiles}}mph</dd>
+            <dt>Humidity:</dt> <dd>{{model.weather.humidity}}%</dd>
             <dt>Cloud cover:</dt>
             <dd>
-              {{data.cloudcover}}% &ndash;
-              {{#each data.weatherDesc as |desc|}}
+              {{model.weather.cloudcover}}% &ndash;
+              {{#each model.weather.weatherDesc as |desc|}}
                 {{desc.value}}
               {{/each}}
             </dd>
@@ -38,10 +44,10 @@
         <br><br>
         <h1 class="section-title">Location</h1>
         <dl>
-          <dt>Latitude</dt> <dd>{{coords.latitude}}</dd>
-          <dt>Longitude</dt> <dd>{{coords.longitude}}</dd>
-        {{#if selectedVenue}}
-          <dt>Location name</dt> <dd>{{selectedVenue.name}}</dd>
+          <dt>Latitude</dt> <dd>{{model.geolocation.latitude}}</dd>
+          <dt>Longitude</dt> <dd>{{model.geolocation.longitude}}</dd>
+        {{#if model.venue}}
+          <dt>Location name</dt> <dd>{{model.venue.name}}</dd>
         {{/if}}
         </dl>
 
@@ -55,7 +61,7 @@
   {{#if selectVenue}}
     {{#ember-wormhole to="wormhole-target"}}
       {{select-venue close=(action "hideSelectVenue")
-                     selectVenue=(action "chooseVenue")}}
+                     selectVenue=(action "selectVenue")}}
     {{/ember-wormhole}}
   {{/if}}
 </div>

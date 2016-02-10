@@ -1,5 +1,15 @@
 import Ember from 'ember';
 
+const fakePayload = {
+  accuracy: 59,
+  altitude: null,
+  altitudeAccuracy: null,
+  heading: null,
+  latitude: 39.968074,
+  longitude: -82.99629639999999,
+  speed: null
+};
+
 export default Ember.Component.extend({
   geolocation: Ember.inject.service(),
 
@@ -7,7 +17,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     const success = function(position) {
-      return {
+      const payload = {
         accuracy:  position.coords.accuracy,
         altitude:  position.coords.altitude,
         heading:   position.coords.heading,
@@ -15,6 +25,12 @@ export default Ember.Component.extend({
         longitude: position.coords.longitude,
         speed:     position.coords.speed
       };
+
+      if(this.attrs.success) {
+        this.attrs.success(payload);
+      }
+
+      return payload;
     }.bind(this);
 
     const error = function(error) {
@@ -34,15 +50,8 @@ export default Ember.Component.extend({
       }
     }.bind(this);
 
-    this.set('loadingGeolocation', Ember.RSVP.resolve({
-      accuracy: 59,
-      altitude: null,
-      altitudeAccuracy: null,
-      heading: null,
-      latitude: 39.968074,
-      longitude: -82.99629639999999,
-      speed: null
-    }));
+    if(this.attrs.success) { this.attrs.success(fakePayload); }
+    this.set('loadingGeolocation', Ember.RSVP.resolve(fakePayload));
 
     // this.set(
     //   'loadingGeolocation',

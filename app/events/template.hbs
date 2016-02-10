@@ -7,8 +7,8 @@
 <div class="scroll-view below-title-bar">
   {{#each model as |event|}}
     <br>
-    {{#if event.venue}}
-      {{event.venue}}<br>
+    {{#if event.venue.name}}
+      {{event.venue.name}}<br>
     {{/if}}
 
     {{#if event.cost}}

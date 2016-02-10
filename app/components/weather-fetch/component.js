@@ -8,5 +8,9 @@ export default Ember.Component.extend({
                         .current(this.get('latitude'), this.get('longitude'));
 
     this.set('loadingWeather', promise);
+
+    promise.then(result => {
+      this.attrs.success(result);
+    });
   }
 });

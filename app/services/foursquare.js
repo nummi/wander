@@ -31,16 +31,6 @@ export default Ember.Service.extend({
   },
 
   venues(lat, lng, name) {
-    // const mungeResponse = function(response) {
-    //   let newResponse = _.cloneDeep(response);
-
-    //   newResponse.venues =  _.flatten(_.map(response.groups, function(group) {
-    //     return _.pluck(group.items, 'venue');
-    //   }));
-
-    //   return newResponse;
-    // };
-
     return Ember.RSVP.resolve(payload.response);
     const defaults = this.generateDefaultAjaxOptions();
 

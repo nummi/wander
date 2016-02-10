@@ -1,8 +1,9 @@
 import Ember from 'ember';
-import eventsPayload from 'wander/events-payload';
 
 export default Ember.Route.extend({
+  events: Ember.inject.service(),
+
   model() {
-    return eventsPayload.events
+    return this.get('events').get('all');
   }
 });

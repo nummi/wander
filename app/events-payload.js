@@ -15,7 +15,9 @@ export default {
       cost: 6.50,
       latitude: 39.96819355055,
       longitude: -82.996259488017,
-      venue: 'V Power Yoga',
+      venue: {
+        name: 'V Power Yoga'
+      },
       photos: [],
       weather: {
         'cloudcover': '75',
@@ -42,7 +44,9 @@ export default {
       cost: 0.00,
       latitude: 35.1591247,
       longitude: -80.8869856,
-      venue: 'Hawthorn Suites by Wyndham',
+      venue: {
+        name: 'Hawthorn Suites by Wyndham'
+      },
       photos: [],
       weather: {
         'cloudcover': '0',
