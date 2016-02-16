@@ -1,0 +1,27 @@
+## Customize machine
+machine:
+  timezone:
+    America/Los_Angeles
+
+
+## Customize dependencies
+dependencies:
+  cache_directories:
+    - "./node_modules"
+    - "./bower_components"
+
+
+## Customize test commands
+test:
+  pre:
+    - npm install && bower install
+  override:
+    - ./node_modules/.bin/ember test
+
+
+## Customize heroku deployment
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: wander-free
