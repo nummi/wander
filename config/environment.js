@@ -43,6 +43,8 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV.host = 'http://localhost:3000';
+
     if(Error && Error.stackTraceLimit) {
       Error.stackTraceLimit = 50;
     }
@@ -71,7 +73,11 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.host = 'http://wander-server.herokuapp.com';
+  }
 
+  if (environment === 'staging') {
+    ENV.host = 'http://wander-server.herokuapp.com';
   }
 
   return ENV;

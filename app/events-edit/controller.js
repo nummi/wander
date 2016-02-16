@@ -5,8 +5,9 @@ export default Ember.Controller.extend({
 
   actions: {
     save() {
-      this.get('model').save();
-      this.transitionToRoute('events');
+      this.get('model').save().then(() => {
+        this.transitionToRoute('events');
+      });
     },
 
     cancel() {
@@ -23,6 +24,7 @@ export default Ember.Controller.extend({
     },
 
     'delete': function() {
+      this.set('confirmDelete', false);
       this.get('model').destroyRecord().then(()=> {
         this.transitionToRoute('events');
       });
