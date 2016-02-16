@@ -13,8 +13,10 @@ export default {
       id: 1,
       description: 'This is a long description here',
       cost: 6.50,
-      latitude: 39.96819355055,
-      longitude: -82.996259488017,
+      geolocation: {
+        latitude: 39.96819355055,
+        longitude: -82.996259488017
+      },
       venue: {
         name: 'V Power Yoga'
       },
@@ -42,8 +44,10 @@ export default {
       id: 2,
       description: 'Cancelled flight, hotel provided by airline',
       cost: 0.00,
-      latitude: 35.1591247,
-      longitude: -80.8869856,
+      geolocation: {
+        latitude: 35.1591247,
+        longitude: -80.8869856
+      },
       venue: {
         name: 'Hawthorn Suites by Wyndham'
       },

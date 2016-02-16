@@ -4,30 +4,30 @@
   {{/link-to}}
 </div>
 
-<div class="scroll-view below-title-bar">
-  {{#each model as |event|}}
-    <br>
-    {{#if event.venue.name}}
-      {{event.venue.name}}<br>
-    {{/if}}
+<div class="table-view scroll-view below-title-bar animation-fade-in">
+  {{#each sortedEvents as |event|}}
+    {{#link-to "events-edit" event.id class="table-view-item"}}
+      {{#if event.venue.name}}
+        {{event.venue.name}}<br>
+      {{/if}}
 
-    {{#if event.cost}}
-      ${{event.cost}}<br>
-    {{/if}}
+      {{#if event.cost}}
+        ${{event.cost}}<br>
+      {{/if}}
 
-    {{#if event.description}}
-      {{event.description}}<br>
-    {{/if}}
+      {{#if event.description}}
+        {{event.description}}<br>
+      {{/if}}
 
-    {{#if event.weather.temp_F}}
-      {{event.weather.temp_F}}F
-    {{/if}}
+      {{#if event.weather.temp_F}}
+        {{event.weather.temp_F}}F
+      {{/if}}
 
-    {{#if event.weather.weatherDesc}}
-      {{#each event.weather.weatherDesc as |desc|}}
-        {{desc.value}}
-      {{/each}}
-    {{/if}}
-    <br><br><hr>
+      {{#if event.weather.weatherDesc}}
+        {{#each event.weather.weatherDesc as |desc|}}
+          {{desc.value}}
+        {{/each}}
+      {{/if}}
+    {{/link-to}}
   {{/each}}
 </div>
