@@ -1,4 +1,18 @@
-{{#each sortedEvents as |event|}}
-  {{event}}
-  <br><br>
-{{/each}}
+<div class="display-view">
+  <div class="display-view-section">
+    {{#each sortedEvents as |event|}}
+      {{event}}
+      <br><br>
+    {{/each}}
+  </div>
+  <div class="display-view-section">
+    {{#g-maps-data-source events=sortedEvents as |map|}}
+      {{g-maps name="my-map"
+               lat=map.lat
+               lng=map.lng
+               zoom=map.zoom
+               markers=map.markers
+               mapType=map.type}}
+    {{/g-maps-data-source}}
+  </div>
+</div>

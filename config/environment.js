@@ -23,7 +23,7 @@ module.exports = function(environment) {
       'script-src': "'self' 'unsafe-eval'", // loading visualEditor via getScript
       'font-src': "'self'",
       'connect-src': "'self'",
-      'img-src': "'self'",
+      'img-src': "'self' *.googleapis.com maps.gstatic.com csi.gstatic.com",
       'style-src': "'self' 'unsafe-inline'", // Allow inline styles
       'media-src': "'self'"
     },
@@ -35,6 +35,10 @@ module.exports = function(environment) {
 
     worldWeatherOnline: {
       key: '4bb4eba8c8e3e0eca68cf4698bb0e'
+    },
+
+    googleMap: {
+      apiKey: 'AIzaSyAsDhesK7jQMtm6uRRy0QdHxzmSiRT1aB4'
     },
 
     'ember-cli-mirage': {

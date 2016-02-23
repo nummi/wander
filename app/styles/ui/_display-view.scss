@@ -1,0 +1,12 @@
+.display-view {
+  @include position(absolute, 0 0 0 0);
+  @include display(flex);
+  @include flex-direction(column);
+  @include flex-wrap(nowrap);
+  @include align-items(stretch);
+  @include align-content(stretch);
+}
+
+.display-view-section {
+  flex-basis: 50%;
+}
