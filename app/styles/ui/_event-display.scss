@@ -1,0 +1,69 @@
+.event-display {
+  position: relative;
+  border-bottom: 1px solid #eee;
+  padding: 3rem 3rem 2rem 3rem;
+  font-family: 'Helvetica Neue', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  @include transition(all 0.1s ease-in-out);
+  cursor: pointer;
+
+  &:hover {
+    background: #fafafa;
+  }
+
+  &:after {
+    @include position(absolute, 0 0 0 auto);
+    @include transition(width 0.1s ease-in-out);
+    width: 0;
+    background: #E9F7FB;
+    content: '';
+  }
+}
+
+.event-display--active {
+  &:after {
+    width: 100%;
+  }
+}
+
+.event-display-content {
+  position: relative;
+  z-index: 1;
+}
+
+.event-display-category {
+  position: relative;
+  margin-bottom: 0.5rem;
+  color: #999;
+  font-size: 1.0rem;
+  text-transform: uppercase;
+
+  &:after {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 12px;
+    height: 1px;
+    background-color: #999;
+    content: '';
+  }
+}
+
+.event-display-venue-name {
+  font-size: 2.4rem;
+  font-weight: 300;
+}
+
+.event-display-meta {
+  @include justify-content(flex-start);
+  @include align-items(center);
+  font-size: 1.2rem;
+
+  .flex-element {
+    @include flex-grow(0);
+    padding-right: 1.5rem;
+  }
+}
+
+.event-display-weather-icon {
+  width: 40px;
+}

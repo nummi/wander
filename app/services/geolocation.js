@@ -1,8 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Service.extend({
+const {
+  Service,
+  RSVP
+} = Ember;
+
+export default Service.extend({
   getGeoposition() {
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new RSVP.Promise(function(resolve, reject) {
       navigator.geolocation.getCurrentPosition(resolve, reject, {
         enableHighAccuracy: true
       });

@@ -1,31 +1,37 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const {
+  Controller,
+  get, set,
+  run
+} = Ember;
+
+export default Controller.extend({
   confirmDelete: false,
 
   actions: {
     save() {
-      this.get('model').save().then(() => {
+      get(this, 'model').save().then(() => {
         this.transitionToRoute('events');
       });
     },
 
     cancel() {
-      this.get('model').rollbackAttributes();
+      get(this, 'model').rollbackAttributes();
       this.transitionToRoute('events');
     },
 
     confirmDelete() {
-      this.set('confirmDelete', true);
+      set(this, 'confirmDelete', true);
 
-      Ember.run.later(this, function() {
-        this.set('confirmDelete', false);
+      run.later(this, function() {
+        set(this, 'confirmDelete', false);
       }, 5000);
     },
 
     'delete': function() {
-      this.set('confirmDelete', false);
-      this.get('model').destroyRecord().then(()=> {
+      set(this, 'confirmDelete', false);
+      get(this, 'model').destroyRecord().then(()=> {
         this.transitionToRoute('events');
       });
     }

@@ -1,7 +1,7 @@
 .display-view {
   @include position(absolute, 0 0 0 0);
   @include display(flex);
-  @include flex-direction(column);
+  @include flex-direction(row);
   @include flex-wrap(nowrap);
   @include align-items(stretch);
   @include align-content(stretch);

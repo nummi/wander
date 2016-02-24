@@ -7,6 +7,8 @@
 <div class="table-view scroll-view below-title-bar animation-fade-in">
   {{#each sortedEvents as |event|}}
     {{#link-to "events-edit" event.id class="table-view-item"}}
+      {{event.category}}<br>
+
       {{#if event.venue.name}}
         {{event.venue.name}}<br>
       {{/if}}

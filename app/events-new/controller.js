@@ -1,32 +1,38 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const {
+  Controller,
+  get, set,
+  run
+} = Ember;
+
+export default Controller.extend({
   selectVenue: false,
 
   actions: {
     selectVenue(venue) {
-      this.set('model.venue', venue);
-      this.set('selectVenue', false);
+      set(this, 'model.venue', venue);
+      set(this, 'selectVenue', false);
     },
 
     showSelectVenue() {
-      this.set('selectVenue', true);
+      set(this, 'selectVenue', true);
     },
 
     hideSelectVenue() {
-      this.set('selectVenue', false);
+      set(this, 'selectVenue', false);
     },
 
     geoLocationSuccess(data) {
-      this.set('model.geolocation', data);
+      set(this, 'model.geolocation', data);
     },
 
     weatherSuccess(data) {
-      this.set('model.weather', data);
+      set(this, 'model.weather', data);
     },
 
     save() {
-      this.store.createRecord('event', this.get('model'))
+      this.store.createRecord('event', get(this, 'model'))
                 .save().then(()=> {
         this.transitionToRoute('events');
       });

@@ -1,18 +1,59 @@
 <div class="display-view">
-  <div class="display-view-section">
+  <div class="display-view-section" style="overflow: auto;">
     {{#each sortedEvents as |event|}}
-      {{event}}
-      <br><br>
+      <div class="event-display {{if (eq highlightedEvent.id event.id) "event-display--active"}}" {{action "highlightEvent" event}}>
+          <div class="event-display-content">
+          <div class="event-display-category">
+            {{event.category}} - {{moment-format event.createdAt}}
+          </div>
+
+          <div class="event-display-venue-name">
+            {{event.displayText}}
+          </div>
+
+          <div class="event-display-meta flex-group">
+            {{#if event.cost}}
+              <div class="flex-element">
+                ${{event.cost}}
+              </div>
+            {{/if}}
+
+            {{#if event.weather.temp_F}}
+              <div class="flex-element">
+                {{event.weather.temp_F}}F&#176;
+              </div>
+            {{/if}}
+
+            {{#if event.weather.weatherCode}}
+              <div class="flex-element">
+                <img class="event-display-weather-icon" src="data:image/png;base64,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">
+              </div>
+            {{/if}}
+
+            {{#if event.weather.weatherDesc}}
+              <div class="flex-element">
+                {{#each event.weather.weatherDesc as |desc|}}
+                  {{desc.value}}
+                {{/each}}
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      </div>
     {{/each}}
   </div>
-  <div class="display-view-section">
-    {{#g-maps-data-source events=sortedEvents as |map|}}
+  {{#util/resize-element class="display-view-section"
+                         targetClass="ember-cli-g-map"}}
+    {{#g-maps-data-source events=sortedEvents
+                          highlightEvent=(action "highlightEvent")
+                          as |map|}}
       {{g-maps name="my-map"
                lat=map.lat
                lng=map.lng
                zoom=map.zoom
                markers=map.markers
+               polylines=map.polylines
                mapType=map.type}}
     {{/g-maps-data-source}}
-  </div>
+  {{/util/resize-element}}
 </div>

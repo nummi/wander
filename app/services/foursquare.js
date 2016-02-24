@@ -3,7 +3,13 @@ import Ember from 'ember';
 import ENV from 'wander/config/environment';
 import payload from 'wander/foursquare-payload';
 
-const { isEmpty } = Ember;
+const {
+  get, set,
+  inject: { service },
+  isEmpty,
+  RSVP,
+  Service
+} = Ember;
 
 const urls = {
   ACCESS_TOKEN_URL: 'https://foursquare.com/oauth2/access_token',
@@ -13,8 +19,8 @@ const urls = {
   VENUES_SEARCH: 'https://api.foursquare.com/v2/venues/search'
 };
 
-export default Ember.Service.extend({
-  ajax: Ember.inject.service(),
+export default Service.extend({
+  ajax: service(),
 
   init() {
     this._super(...arguments);
@@ -23,15 +29,15 @@ export default Ember.Service.extend({
 
   generateDefaultAjaxOptions() {
     return {
-      client_id: this.get('clientId'),
-      client_secret: this.get('clientSecret'),
+      client_id: get(this, 'clientId'),
+      client_secret: get(this, 'clientSecret'),
       v: moment().format('YYYYMMDD'),
       sortByDistance: 1
     }
   },
 
   venues(lat, lng, name) {
-    return Ember.RSVP.resolve(payload.response);
+    return RSVP.resolve(payload.response);
     const defaults = this.generateDefaultAjaxOptions();
 
     let data = {
@@ -42,7 +48,7 @@ export default Ember.Service.extend({
       data.query = name;
     }
 
-    return this.get('ajax').request(urls.VENUES_SEARCH, {
+    return get(this, 'ajax').request(urls.VENUES_SEARCH, {
       data: _.assign(defaults, data)
     }).then(payload => {
       return payload.response;

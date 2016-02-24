@@ -1,6 +1,13 @@
 import Ember from 'ember';
 import ENV from 'wander/config/environment';
 
+const {
+  get, set,
+  inject: { service },
+  Service,
+  RSVP
+} = Ember;
+
 const payload =  {
   'data': {
     'current_condition': [
@@ -39,8 +46,8 @@ const urls = {
   BASE: 'https://api.worldweatheronline.com/free/v2/weather.ashx'
 };
 
-export default Ember.Service.extend({
-  ajax: Ember.inject.service(),
+export default Service.extend({
+  ajax: service(),
 
   init() {
     this._super(...arguments);
@@ -54,9 +61,9 @@ export default Ember.Service.extend({
 
     const url = urls.BASE + params;
 
-    return Ember.RSVP.resolve(payload.data.current_condition[0]);
+    return RSVP.resolve(payload.data.current_condition[0]);
 
-    return this.get('ajax').request(url).then(payload => {
+    return get(this, 'ajax').request(url).then(payload => {
       return payload.data.current_condition[0];
     });
   }

@@ -1,6 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+const {
+  Controller,
+  computed: { sort }
+} = Ember;
+
+export default Controller.extend({
   eventsSortingDesc: ['createdAt:desc'],
-  sortedEvents: Ember.computed.sort('model', 'eventsSortingDesc')
+  sortedEvents: sort('model', 'eventsSortingDesc')
 });

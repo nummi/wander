@@ -1,6 +1,25 @@
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
-  eventsSortingDesc: ['createdAt:desc'],
-  sortedEvents: Ember.computed.sort('model', 'eventsSortingDesc')
+const {
+  Controller,
+  get,
+  inject: { service },
+  computed,
+  computed: { alias, sort }
+}  = Ember;
+
+export default Controller.extend({
+  eventsSortingDesc: ['createdAt:asc'],
+  sortedEvents: sort('model', 'eventsSortingDesc'),
+
+  highlightedEvent: null,
+  scrollHighlightedEventIntoView() {
+  },
+
+  actions: {
+    highlightEvent(event) {
+      this.set('highlightedEvent', event);
+      this.scrollHighlightedEventIntoView();
+    }
+  }
 });
