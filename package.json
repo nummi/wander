@@ -47,7 +47,6 @@
     "ember-wormhole": "0.3.4",
     "liquid-fire": "0.22.1",
     "loader.js": "^4.0.0",
-    "moment": "2.11.2",
-    "moment-timezone": "0.5.0"
+    "moment": "2.11.2"
   }
 }
