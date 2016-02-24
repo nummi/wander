@@ -44,7 +44,7 @@
   </div>
   {{#util/resize-element class="display-view-section"
                          targetClass="ember-cli-g-map"}}
-    {{#g-maps-data-source events=sortedEvents
+    {{#events-maps-data-source events=sortedEvents
                           highlightEvent=(action "highlightEvent")
                           as |map|}}
       {{g-maps name="my-map"
@@ -54,6 +54,6 @@
                markers=map.markers
                polylines=map.polylines
                mapType=map.type}}
-    {{/g-maps-data-source}}
+    {{/events-maps-data-source}}
   {{/util/resize-element}}
 </div>

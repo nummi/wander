@@ -44,11 +44,14 @@
         <br><br>
         <h1 class="section-title">Location</h1>
         <dl>
-          <dt>Latitude</dt> <dd>{{model.geolocation.latitude}}</dd>
-          <dt>Longitude</dt> <dd>{{model.geolocation.longitude}}</dd>
-        {{#if model.venue}}
-          <dt>Location name</dt> <dd>{{model.venue.name}}</dd>
-        {{/if}}
+          <dt>Latitude</dt>
+          <dd>{{input value=model.geolocation.latitude}}</dd>
+          <dt>Longitude</dt>
+          <dd>{{input value=model.geolocation.longitude}}</dd>
+          {{#if model.venue}}
+            <dt>Name</dt>
+            <dd>{{input value=model.venue.name}}</dd>
+          {{/if}}
         </dl>
 
         <button {{action "showSelectVenue"}}>Select Location Name</button>
