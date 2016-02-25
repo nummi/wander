@@ -18,6 +18,7 @@ module.exports = function(defaults) {
   });
 
   app.import(app.bowerDirectory + '/moment/moment.js');
+  app.import(app.bowerDirectory + '/jquery.scrollTo/jquery.scrollTo.min.js');
 
   return app.toTree();
 };

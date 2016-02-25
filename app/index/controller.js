@@ -14,6 +14,9 @@ export default Controller.extend({
 
   highlightedEvent: null,
   scrollHighlightedEventIntoView() {
+    Ember.run.later(function() {
+      $('.display-view-section').scrollTo($('.event-display--active'), 300);
+    }, 100);
   },
 
   actions: {
