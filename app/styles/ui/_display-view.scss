@@ -7,6 +7,11 @@
   @include align-content(stretch);
 }
 
-.display-view-section {
-  flex-basis: 50%;
+.display-view-list-section {
+  overflow: auto;
+  flex-basis: 35%;
+}
+
+.display-view-map-section {
+  flex-basis: 65%;
 }

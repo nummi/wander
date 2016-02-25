@@ -1,10 +1,10 @@
 <div class="display-view">
-  <div class="display-view-section" style="overflow: auto;">
+  <div class="display-view-list-section">
     {{#each sortedEvents as |event|}}
       <div class="event-display {{if (eq highlightedEvent.id event.id) "event-display--active"}}" {{action "highlightEvent" event}}>
           <div class="event-display-content">
           <div class="event-display-category">
-            {{event.category}} - {{moment-format event.createdAt}}
+            {{event.category}} &ndash; {{moment-format event.createdAt}}
           </div>
 
           <div class="event-display-venue-name">
@@ -42,7 +42,7 @@
       </div>
     {{/each}}
   </div>
-  {{#util/resize-element class="display-view-section"
+  {{#util/resize-element class="display-view-map-section"
                          targetClass="ember-cli-g-map"}}
     {{#events-maps-data-source events=sortedEvents
                           highlightEvent=(action "highlightEvent")
