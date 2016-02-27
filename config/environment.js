@@ -28,21 +28,29 @@ module.exports = function(environment) {
       'media-src': "'self'"
     },
 
-    foursquare: {
-      clientId: 'JIVBLDT2LB0JJWNRAZNOE42B4VDRWB0KGADJPCGRHLIUJKVZ',
-      clientSecret: 'DZGYBBUYTEKITZMFL4CUC0V5F0DZJ4L3KPLPST1VOERUOYBS'
-    },
+    services: {
+      foursquare: {
+        fake: false,
+        config: {
+          clientId: 'JIVBLDT2LB0JJWNRAZNOE42B4VDRWB0KGADJPCGRHLIUJKVZ',
+          clientSecret: 'DZGYBBUYTEKITZMFL4CUC0V5F0DZJ4L3KPLPST1VOERUOYBS'
+        }
+      },
 
-    worldWeatherOnline: {
-      key: '4bb4eba8c8e3e0eca68cf4698bb0e'
+      geolocation: {
+        fake: false,
+      },
+
+      worldWeatherOnline: {
+        fake: false,
+        config: {
+          key: '4bb4eba8c8e3e0eca68cf4698bb0e'
+        }
+      }
     },
 
     googleMap: {
       apiKey: 'AIzaSyAsDhesK7jQMtm6uRRy0QdHxzmSiRT1aB4'
-    },
-
-    'ember-cli-mirage': {
-      enabled: false
     }
   };
 

@@ -1,5 +1,1 @@
-{{#util/promise-loader promise=loadingVenues as |data|}}
-  {{yield data (action "searchForVenue")}}
-{{else}}
-  {{yield to="inverse"}}
-{{/util/promise-loader}}
+{{yield fetch}}

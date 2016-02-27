@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 const {
   Controller,
-  get,
+  get, set,
   inject: { service },
   computed,
   computed: { alias, sort }
@@ -11,6 +11,8 @@ const {
 export default Controller.extend({
   eventsSortingDesc: ['createdAt:asc'],
   sortedEvents: sort('model', 'eventsSortingDesc'),
+
+  viewState: 'Events',
 
   highlightedEvent: null,
   scrollHighlightedEventIntoView() {
@@ -21,8 +23,12 @@ export default Controller.extend({
 
   actions: {
     highlightEvent(event) {
-      this.set('highlightedEvent', event);
+      set(this, 'highlightedEvent', event);
       this.scrollHighlightedEventIntoView();
+    },
+
+    changeViewState(value) {
+      set(this, 'viewState', value);
     }
   }
 });

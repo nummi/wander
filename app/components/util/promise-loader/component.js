@@ -4,6 +4,7 @@ const {
   Component,
   computed,
   computed: { reads },
+  get,
   ObjectProxy,
   PromiseProxyMixin,
   RSVP
@@ -16,7 +17,7 @@ export default Component.extend({
 
   promiseProxy: computed('promise', function() {
     return PromiseObject.create({
-      promise: RSVP.resolve(this.get('promise'))
+      promise: RSVP.resolve(get(this, 'promise'))
     });
   }),
 

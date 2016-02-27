@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'wander/config/environment';
 
 const {
   Component,
@@ -22,7 +23,10 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
+    this.fetch();
+  },
 
+  fetch() {
     const success = function(position) {
       const payload = {
         accuracy:  position.coords.accuracy,
@@ -56,13 +60,14 @@ export default Component.extend({
       }
     }.bind(this);
 
-    if(this.attrs.success) { this.attrs.success(fakePayload); }
-    set(this, 'loadingGeolocation', RSVP.resolve(fakePayload));
+    if(ENV.services.geolocation.fake) {
+      if(this.attrs.success) { this.attrs.success(fakePayload); }
+      set(this, 'loadingGeolocation', RSVP.resolve(fakePayload));
+    }
 
-    // set(
-    //   this,
-    //   'loadingGeolocation',
-    //   get(this, 'geolocation').getGeoposition().then(success, error)
-    // );
+    set(
+      this, 'loadingGeolocation',
+      get(this, 'geolocation').getGeoposition().then(success, error)
+    );
   }
 });

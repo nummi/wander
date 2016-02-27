@@ -1,3 +1,13 @@
+{{!--
+{{#segmented-buttons selectedValue=viewState
+                     valueSelected=(action "changeViewState")
+                     class="display-view-toggle"
+                     as |s|}}
+  {{#s.button value="Events"}}Events{{/s.button}}
+  {{#s.button value="Map"}}Map{{/s.button}}
+  {{/segmented-buttons}}
+--}}
+
 <div class="display-view">
   <div class="display-view-list-section">
     {{#each sortedEvents as |event|}}

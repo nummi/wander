@@ -4,7 +4,7 @@ import ENV from 'wander/config/environment';
 import payload from 'wander/foursquare-payload';
 
 const {
-  get, set,
+  get, set, setProperties,
   inject: { service },
   isEmpty,
   RSVP,
@@ -24,7 +24,7 @@ export default Service.extend({
 
   init() {
     this._super(...arguments);
-    this.setProperties(ENV.foursquare);
+    setProperties(this, ENV.services.foursquare.config);
   },
 
   generateDefaultAjaxOptions() {
@@ -37,7 +37,10 @@ export default Service.extend({
   },
 
   venues(lat, lng, name) {
-    return RSVP.resolve(payload.response);
+    // if(ENV.services.foursquare.fake) {
+    //   return RSVP.resolve(payload.response);
+    // }
+    //
     const defaults = this.generateDefaultAjaxOptions();
 
     let data = {
@@ -50,8 +53,8 @@ export default Service.extend({
 
     return get(this, 'ajax').request(urls.VENUES_SEARCH, {
       data: _.assign(defaults, data)
-    }).then(payload => {
-      return payload.response;
+    }).then(result => {
+      return result.response;
     });
   }
 });

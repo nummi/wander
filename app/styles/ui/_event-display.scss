@@ -14,7 +14,7 @@
     @include position(absolute, 0 0 0 auto);
     @include transition(width 0.1s ease-in-out);
     width: 0;
-    background: #E9F7FB;
+    background: adjust-color($ios-blue, $lightness: 47);
     content: '';
   }
 }

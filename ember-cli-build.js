@@ -12,7 +12,8 @@ module.exports = function(defaults) {
       extensions: ['js']
     },
     babel: {
-      optional: ['es7.decorators']
+      optional: ['es7.decorators'],
+      includePolyfill: true
     }
     // Add options here
   });

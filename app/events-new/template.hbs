@@ -23,22 +23,26 @@
         <h1 class="section-title">Weather</h1>
         {{#weather-fetch latitude=model.geolocation.latitude
                          longitude=model.geolocation.longitude
-                         success=(action "weatherSuccess")}}
-          <dl>
-            <dt>Temperature:</dt>
-            <dd>{{model.weather.temp_F}}F, feels like {{model.weather.FeelsLikeF}}F</dd>
-            <dt>Windspeed:</dt> <dd>{{model.weather.windspeedMiles}}mph</dd>
-            <dt>Humidity:</dt> <dd>{{model.weather.humidity}}%</dd>
-            <dt>Cloud cover:</dt>
-            <dd>
-              {{model.weather.cloudcover}}% &ndash;
-              {{#each model.weather.weatherDesc as |desc|}}
-                {{desc.value}}
-              {{/each}}
-            </dd>
-          </dl>
-        {{else}}
-          Loading weather...
+                         success=(action "weatherSuccess")
+                         as |fetch|}}
+          {{#if fetch.isRunning}}
+            Loading weather...
+          {{/if}}
+          {{#if (and fetch.isIdle model.weather)}}
+            <dl>
+              <dt>Temperature:</dt>
+              <dd>{{model.weather.temp_F}}F, feels like {{model.weather.FeelsLikeF}}F</dd>
+              <dt>Windspeed:</dt> <dd>{{model.weather.windspeedMiles}}mph</dd>
+              <dt>Humidity:</dt> <dd>{{model.weather.humidity}}%</dd>
+              <dt>Cloud cover:</dt>
+              <dd>
+                {{model.weather.cloudcover}}% &ndash;
+                {{#each model.weather.weatherDesc as |desc|}}
+                  {{desc.value}}
+                {{/each}}
+              </dd>
+            </dl>
+          {{/if}}
         {{/weather-fetch}}
 
         <br><br>

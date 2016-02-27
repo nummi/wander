@@ -2,33 +2,38 @@
   {{#geo-location as |coords|}}
     {{#load-venue-list latitude=coords.latitude
                        longitude=coords.longitude
-                       as |data search|}}
-      <div class="title-bar">
-        <div class="title-bar-button" {{action "close"}}>Cancel</div>
-        <div class="title-bar-text">{{data.headerLocation}}</div>
-      </div>
-
-      <div class="table-view scroll-view below-title-bar animation-fade-in">
-        <div class="table-view-item table-view-item--search flex-group">
-          <div class="flex-element">
-            {{input value="" action=search placeholder="find a place"}}
-          </div>
+                       success=(action "venuesLoaded")
+                       as |fetch|}}
+      {{#if fetch.isRunning}}
+        <div class="title-bar">
+          <div class="title-bar-button">Cancel</div>
+          <div class="title-bar-text">Loading locations...</div>
+          <div></div>
         </div>
-        {{#each data.venues as |venue|}}
-          <div class="table-view-item" {{action "selectVenue" venue}}>
-            <div class="table-view-item-text-label">{{venue.name}}</div>
-            <div class="table-view-item-text-label-detail">{{venue.location.distance}} ft</div>
+      {{/if}}
+
+      {{#if fetch.isIdle}}
+        <div class="title-bar">
+          <div class="title-bar-button" {{action "close"}}>Cancel</div>
+          <div class="title-bar-text">{{data.headerLocation}}</div>
+        </div>
+
+        <div class="table-view scroll-view below-title-bar animation-fade-in">
+          <div class="table-view-item table-view-item--search flex-group">
+            <div class="flex-element">
+              {{input value="" action=search placeholder="find a place"}}
+            </div>
           </div>
-        {{else}}
-          No locations found
-        {{/each}}
-      </div>
-    {{else}}
-      <div class="title-bar">
-        <div class="title-bar-button">Cancel</div>
-        <div class="title-bar-text">Error loading locations</div>
-        <div></div>
-      </div>
+          {{#each data.venues as |venue|}}
+            <div class="table-view-item" {{action "selectVenue" venue}}>
+              <div class="table-view-item-text-label">{{venue.name}}</div>
+              <div class="table-view-item-text-label-detail">{{venue.location.distance}} ft</div>
+            </div>
+          {{else}}
+            No locations found
+          {{/each}}
+        </div>
+      {{/if}}
     {{/load-venue-list}}
   {{else}}
     <div class="title-bar">

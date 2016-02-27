@@ -1,5 +1,1 @@
-{{#util/promise-loader promise=loadingWeather as |data|}}
-  {{yield data}}
-{{else}}
-  {{yield to="inverse"}}
-{{/util/promise-loader}}
+{{yield fetch}}

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { task } from 'ember-concurrency';
 
 const {
   Component,
@@ -9,15 +10,18 @@ const {
 export default Component.extend({
   weather: service(),
 
-  didReceiveAttrs() {
-    const promise = get(this, 'weather').current(
-      this.get('latitude'), this.get('longitude')
+  init() {
+    this._super(...arguments);
+    get(this, 'fetch').perform();
+  },
+
+  fetch: task(function * () {
+    const xhr = get(this, 'weather').current(
+      get(this, 'latitude'), get(this, 'longitude')
     );
 
-    set(this, 'loadingWeather', promise);
+    yield xhr;
 
-    promise.then(result => {
-      this.attrs.success(result);
-    });
-  }
+    xhr.then((result)=> { this.attrs.success(result); })
+  }).drop()
 });

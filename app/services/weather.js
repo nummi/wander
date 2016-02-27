@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ENV from 'wander/config/environment';
 
 const {
-  get, set,
+  get, set, setProperties,
   inject: { service },
   Service,
   RSVP
@@ -23,16 +23,8 @@ const payload =  {
         'temp_F': '27',
         'visibility': '16',
         'weatherCode': '116',
-        'weatherDesc': [
-          {
-            'value': 'Partly Cloudy'
-          }
-        ],
-        'weatherIconUrl': [
-          {
-            'value': 'http:\/\/cdn.worldweatheronline.net\/images\/wsymbols01_png_64\/wsymbol_0002_sunny_intervals.png'
-          }
-        ],
+        'weatherDesc': [ { 'value': 'Partly Cloudy' } ],
+        'weatherIconUrl': [ { 'value': 'http:\/\/cdn.worldweatheronline.net\/images\/wsymbols01_png_64\/wsymbol_0002_sunny_intervals.png' } ],
         'winddir16Point': 'ENE',
         'winddirDegree': '60',
         'windspeedKmph': '24',
@@ -51,17 +43,19 @@ export default Service.extend({
 
   init() {
     this._super(...arguments);
-    this.setProperties(ENV.worldWeatherOnline);
+    setProperties(this, ENV.services.worldWeatherOnline.config);
   },
 
   current(lat, lng) {
-    const params = '?key=' + this.get('key') +
+    if(ENV.services.worldWeatherOnline.fake) {
+      return RSVP.resolve(payload.data.current_condition[0]);
+    }
+
+    const params = '?key=' + get(this, 'key') +
                    '&q=' + lat + ',' + lng +
                    '&format=json';
 
     const url = urls.BASE + params;
-
-    return RSVP.resolve(payload.data.current_condition[0]);
 
     return get(this, 'ajax').request(url).then(payload => {
       return payload.data.current_condition[0];
