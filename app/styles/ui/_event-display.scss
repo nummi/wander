@@ -36,16 +36,6 @@
   color: #999;
   font-size: 1.0rem;
   text-transform: uppercase;
-
-  &:after {
-    position: absolute;
-    top: -7px;
-    left: 0;
-    width: 12px;
-    height: 1px;
-    background-color: #999;
-    content: '';
-  }
 }
 
 .event-display-venue-name {
