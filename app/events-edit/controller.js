@@ -6,8 +6,11 @@ const {
   run
 } = Ember;
 
+import { categories } from 'wander/categories';
+
 export default Controller.extend({
   confirmDelete: false,
+  categories: categories,
 
   actions: {
     save() {
@@ -34,6 +37,10 @@ export default Controller.extend({
       get(this, 'model').destroyRecord().then(()=> {
         this.transitionToRoute('events');
       });
-    }
+    },
+
+    categorySelected(category) {
+      set(this, 'model.category', category);
+    },
   }
 });

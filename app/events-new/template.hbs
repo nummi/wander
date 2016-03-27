@@ -11,12 +11,32 @@
 
   <div class="scroll-view below-title-bar">
     <div style="padding: 0 20px;">
+      {{#if save.isRunning}}
+        {{loading-spinner}}
+      {{/if}}
+
       <h1 class="section-title">Description</h1>
       {{textarea value=model.description}}
 
       <br><br>
       <h1 class="section-title">Cost</h1>
       {{input value=model.cost}}
+
+      <br><br>
+      <h1 class="section-title">Category</h1>
+      {{#power-select options=categories
+                      selected=model.category
+                      onchange=(action "categorySelected")
+                      as |c|}}
+        {{c}}
+      {{/power-select}}
+
+      <h1 class="section-title">Image</h1>
+      {{#file-picker accept=".jpg,.jpeg,.gif,.png"
+                     fileLoaded="fileLoaded"
+                     readAs="readAsFile"}}
+        Upload Photo
+      {{/file-picker}}
 
       {{#geo-location success=(action "geoLocationSuccess")}}
         <br>

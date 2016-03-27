@@ -1,13 +1,63 @@
 import Ember from 'ember';
+import {
+  dmsToDecimal,
+  gpsDirection
+} from 'wander/lib/gps';
+
+import { task } from 'ember-concurrency';
+import { categories } from 'wander/categories';
+import readFile from 'wander/lib/read-file';
 
 const {
   Controller,
   get, set,
+  inject: { service },
   run
 } = Ember;
 
 export default Controller.extend({
+  exif: service(),
   selectVenue: false,
+
+  file: null,
+  uploader: null,
+
+  categories: categories,
+
+  save: task(function * () {
+    const promise = this.store.createRecord('event', get(this, 'model'))
+                              .save();
+
+    yield promise;
+
+    promise.then(()=> {
+      this.transitionToRoute('events');
+    });
+  }).drop(),
+
+  getLatAndLngWithFile(file) {
+    const self = this;
+    const exif = this.get('exif');
+
+    exif.getData(file, function() {
+      var lat = gpsDirection(
+        exif.getTag(this, 'GPSLatitudeRef'),
+        dmsToDecimal.apply(this, exif.getTag(this, 'GPSLatitude'))
+      );
+
+      var lng = gpsDirection(
+        exif.getTag(this, 'GPSLongitudeRef'),
+        dmsToDecimal.apply(this, exif.getTag(this, 'GPSLongitude'))
+      );
+
+      if(lat && lng) {
+        self.send('geoLocationSuccess', {
+          latitude: lat,
+          longitude: lng
+        });
+      }
+    });
+  },
 
   actions: {
     selectVenue(venue) {
@@ -32,10 +82,35 @@ export default Controller.extend({
     },
 
     save() {
-      this.store.createRecord('event', get(this, 'model'))
-                .save().then(()=> {
-        this.transitionToRoute('events');
+      this.get('save').perform();
+    },
+
+    fileLoaded(file) {
+      this.getLatAndLngWithFile(file);
+
+      readFile(file, 'readAsDataURL').then((convertedFile) => {
+        set(this, 'model.photo', convertedFile);
       });
-    }
+    },
+
+    categorySelected(category) {
+      set(this, 'model.category', category);
+    },
+
+    // old s3 uploader
+    // fileAdded(file, uploader) {
+    //   set(this, 'file', file);
+    //   set(this, 'uploader', uploader);
+    //
+    //   this.getLatAndLngWithFile(file);
+    // },
+    // uploadProgress(data) {
+    // },
+    // uploadFinished(uploadedUrl, data) {
+    // },
+    // uploadFailed(error) {
+    //   console.log('upload failed');
+    //   console.log(error);
+    // }
   }
 });

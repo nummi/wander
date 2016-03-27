@@ -37,10 +37,10 @@ export default Service.extend({
   },
 
   venues(lat, lng, name) {
-    // if(ENV.services.foursquare.fake) {
-    //   return RSVP.resolve(payload.response);
-    // }
-    //
+    if(ENV.services.foursquare.fake) {
+      return RSVP.resolve(payload.response);
+    }
+
     const defaults = this.generateDefaultAjaxOptions();
 
     let data = {

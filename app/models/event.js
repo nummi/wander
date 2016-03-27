@@ -13,6 +13,7 @@ export default DS.Model.extend({
   createdAt: attr('date'),
   description: attr('string'),
   geolocation: attr(),
+  photo: attr('raw'),
   category: attr('string'),
   venue: attr(),
   weather: attr(),

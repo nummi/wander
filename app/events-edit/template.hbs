@@ -18,6 +18,15 @@
       <h1 class="section-title">Cost</h1>
       {{input value=model.cost}}
 
+      <br><br>
+      <h1 class="section-title">Category</h1>
+      {{#power-select options=categories
+                      selected=model.category
+                      onchange=(action "categorySelected")
+                      as |c|}}
+        {{c}}
+      {{/power-select}}
+
       <br>
       <h1 class="section-title">Weather</h1>
       <dl>

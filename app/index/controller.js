@@ -9,6 +9,7 @@ const {
 }  = Ember;
 
 export default Controller.extend({
+  window: service(),
   eventsSortingDesc: ['createdAt:asc'],
   sortedEvents: sort('model', 'eventsSortingDesc'),
 

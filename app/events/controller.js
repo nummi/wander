@@ -6,6 +6,6 @@ const {
 } = Ember;
 
 export default Controller.extend({
-  eventsSortingDesc: ['createdAt:desc'],
-  sortedEvents: sort('model', 'eventsSortingDesc')
+  eventsSortingAsc: ['createdAt:asc'],
+  sortedEvents: sort('model', 'eventsSortingAsc')
 });
