@@ -18,7 +18,7 @@ dependencies:
 ## Customize test commands
 test:
   pre:
-    - npm install && bower install
+    - npm cache clean && npm install && bower install
   override:
     - ./node_modules/.bin/ember test
 

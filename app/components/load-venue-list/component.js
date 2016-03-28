@@ -37,7 +37,6 @@ export default Component.extend({
 
   actions: {
     searchForVenue(name) {
-      alert('toot');
       get(this, 'fetch').perform(
         get(this, 'latitude'),
         get(this, 'longitude'),
