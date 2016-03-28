@@ -4,7 +4,8 @@ import { task } from 'ember-concurrency';
 const {
   Component,
   get, set,
-  inject: { service }
+  inject: { service },
+  isEmpty
 } = Ember;
 
 export default Component.extend({
@@ -14,13 +15,20 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    get(this, 'fetch').perform();
+    get(this, 'fetch').perform(
+      get(this, 'latitude'),
+      get(this, 'longitude')
+    );
   },
 
-  fetch: task(function * () {
-    const xhr = get(this, 'foursquare').venues(
-      get(this, 'latitude'), get(this, 'longitude')
-    );
+  fetch: task(function * (lat, lng, query) {
+    let xhr;
+
+    if(isEmpty(query)) {
+      xhr = get(this, 'foursquare').venues(lat, lng, query);
+    } else {
+      xhr = get(this, 'foursquare').venues(lat, lng);
+    }
 
     yield xhr;
 
@@ -29,11 +37,12 @@ export default Component.extend({
 
   actions: {
     searchForVenue(name) {
-      // const lat     = get(this, 'latitude');
-      // const lng     = get(this, 'longitude');
-      // const promise = get(this, 'foursquare').venues(lat, lng, name);
-
-      // set(this, 'loadingVenues', promise);
+      alert('toot');
+      get(this, 'fetch').perform(
+        get(this, 'latitude'),
+        get(this, 'longitude'),
+        name
+      );
     }
   }
 });

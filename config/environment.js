@@ -30,7 +30,7 @@ module.exports = function(environment) {
 
     services: {
       foursquare: {
-        fake: true,
+        fake: false,
         config: {
           clientId: 'JIVBLDT2LB0JJWNRAZNOE42B4VDRWB0KGADJPCGRHLIUJKVZ',
           clientSecret: 'DZGYBBUYTEKITZMFL4CUC0V5F0DZJ4L3KPLPST1VOERUOYBS'
@@ -42,7 +42,7 @@ module.exports = function(environment) {
       },
 
       worldWeatherOnline: {
-        fake: true,
+        fake: false,
         config: {
           key: '4bb4eba8c8e3e0eca68cf4698bb0e'
         }

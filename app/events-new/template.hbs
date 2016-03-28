@@ -88,6 +88,8 @@
   {{#if selectVenue}}
     {{#ember-wormhole to="wormhole-target"}}
       {{select-venue close=(action "hideSelectVenue")
+                     latitude=model.geolocation.latitude
+                     longitude=model.geolocation.longitude
                      selectVenue=(action "selectVenue")}}
     {{/ember-wormhole}}
   {{/if}}
