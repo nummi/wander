@@ -22,6 +22,10 @@ export default DS.Model.extend({
     return get(this, 'venue.name') || get(this, 'description');
   }),
 
+  photoThumbnail: computed(function() {
+    return this.get('photo.photo.thumbnail.url');
+  }),
+
   iconPath: computed(function() {
     const BASE = '/images/weather-icons/';
     const urls = this.get('weather.weatherIconUrl');

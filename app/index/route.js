@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model() {
-    return this.store.query('event', { publish: true });
+  redirect() {
+    this.transitionTo('events');
   }
 });
