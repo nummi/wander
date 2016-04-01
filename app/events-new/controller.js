@@ -40,20 +40,23 @@ export default Controller.extend({
     const exif = this.get('exif');
 
     exif.getData(file, function() {
-      var lat = gpsDirection(
+      const lat = gpsDirection(
         exif.getTag(this, 'GPSLatitudeRef'),
         dmsToDecimal.apply(this, exif.getTag(this, 'GPSLatitude'))
       );
 
-      var lng = gpsDirection(
+      const lng = gpsDirection(
         exif.getTag(this, 'GPSLongitudeRef'),
         dmsToDecimal.apply(this, exif.getTag(this, 'GPSLongitude'))
       );
 
+      const altitude = gpsAltitude ? gpsAltitude.numerator : null;;
+
       if(lat && lng) {
         self.send('geoLocationSuccess', {
           latitude: lat,
-          longitude: lng
+          longitude: lng,
+          altitude: altitude
         });
       }
     });

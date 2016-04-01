@@ -92,3 +92,12 @@ dd {
   max-height: 200px;
   cursor: pointer;
 }
+
+.ember-basic-dropdown-content,
+.ember-basic-dropdown {
+  font-size: 1.5rem;
+}
+
+.ember-power-select-option {
+  padding: 0.75rem 1rem;
+}
