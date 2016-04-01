@@ -50,7 +50,8 @@ export default Controller.extend({
         dmsToDecimal.apply(this, exif.getTag(this, 'GPSLongitude'))
       );
 
-      const altitude = gpsAltitude ? gpsAltitude.numerator : null;;
+      const gpsAltitude = exif.getTag(this, 'GPSAltitude');
+      const altitude = gpsAltitude ? gpsAltitude.numerator : null;
 
       if(lat && lng) {
         self.send('geoLocationSuccess', {
