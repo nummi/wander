@@ -1,10 +1,10 @@
-{{#util/promise-loader promise=loadingGeolocation as |coords|}}
+{{#if geolocation.getPosition.isRunning}}
+  {{yield to="inverse"}}
+{{else}}
   {{yield (hash accuracy=coords.accuracy
                 altitude=coords.altitude
                 heading=coords.heading
                 latitude=coords.latitude
                 longitude=coords.longitude
                 speed=coords.speed)}}
-{{else}}
-  {{yield to="inverse"}}
-{{/util/promise-loader}}
+{{/if}}

@@ -15,14 +15,6 @@
         {{loading-spinner}}
       {{/if}}
 
-      <h1 class="section-title">Description</h1>
-      {{textarea value=model.description}}
-
-      <br><br>
-      <h1 class="section-title">Cost</h1>
-      {{input value=model.cost}}
-
-      <br><br>
       <h1 class="section-title">Category</h1>
       {{#power-select options=categories
                       selected=model.category
@@ -38,8 +30,27 @@
         Upload Photo
       {{/file-picker}}
 
+      <h1 class="section-title">Description</h1>
+      {{textarea value=model.description}}
+
+      <h1 class="section-title">Cost</h1>
+      {{input value=model.cost}}
+
       {{#geo-location success=(action "geoLocationSuccess")}}
-        <br>
+        <h1 class="section-title">Location</h1>
+        <dl>
+          <dt>Latitude</dt>
+          <dd>{{input value=model.geolocation.latitude}}</dd>
+          <dt>Longitude</dt>
+          <dd>{{input value=model.geolocation.longitude}}</dd>
+          {{#if model.venue}}
+            <dt>Name</dt>
+            <dd>{{input value=model.venue.name}}</dd>
+          {{/if}}
+        </dl>
+
+        <button {{action "showSelectVenue"}}>Select Location Name</button>
+
         <h1 class="section-title">Weather</h1>
         {{#weather-fetch latitude=model.geolocation.latitude
                          longitude=model.geolocation.longitude
@@ -64,22 +75,8 @@
             </dl>
           {{/if}}
         {{/weather-fetch}}
-
-        <br><br>
-        <h1 class="section-title">Location</h1>
-        <dl>
-          <dt>Latitude</dt>
-          <dd>{{input value=model.geolocation.latitude}}</dd>
-          <dt>Longitude</dt>
-          <dd>{{input value=model.geolocation.longitude}}</dd>
-          {{#if model.venue}}
-            <dt>Name</dt>
-            <dd>{{input value=model.venue.name}}</dd>
-          {{/if}}
-        </dl>
-
-        <button {{action "showSelectVenue"}}>Select Location Name</button>
       {{else}}
+        <br>
         Getting location...
       {{/geo-location}}
     </div>

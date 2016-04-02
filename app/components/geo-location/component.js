@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import ENV from 'wander/config/environment';
 
 const {
   Component,
@@ -8,15 +7,10 @@ const {
   RSVP
 } = Ember;
 
-const fakePayload = {
-  accuracy: 59,
-  altitude: null,
-  altitudeAccuracy: null,
-  heading: null,
-  latitude: 39.968074,
-  longitude: -82.99629639999999,
-  speed: null
-};
+const PERMISSION_DENIED    = 'User denied the request for geolocation.';
+const POSITION_UNAVAILABLE = 'Geolocation information is unavailable.';
+const TIMEOUT = 'The request to get geolocation timed out.';
+const UNKNOWN_ERROR = 'An unknown geolocation error occurred.';
 
 export default Component.extend({
   geolocation: service(),
@@ -46,28 +40,20 @@ export default Component.extend({
     const error = function(error) {
       switch(error.code) {
         case error.PERMISSION_DENIED:
-          console.log('User denied the request for geolocation.');
+          alert(PERMISSION_DENIED);
           break;
         case error.POSITION_UNAVAILABLE:
-          console.log('Geolocation information is unavailable.');
+          alert(POSITION_UNAVAILABLE);
           break;
         case error.TIMEOUT:
-          console.log('The request to get geolocation timed out.');
+          alert(TIMEOUT);
           break;
         case error.UNKNOWN_ERROR:
-          console.log('An unknown geolocation error occurred.');
+          alert(UNKNOWN_ERROR);
           break;
       }
     }.bind(this);
 
-    if(ENV.services.geolocation.fake) {
-      if(this.attrs.success) { this.attrs.success(fakePayload); }
-      set(this, 'loadingGeolocation', RSVP.resolve(fakePayload));
-    }
-
-    set(
-      this, 'loadingGeolocation',
-      get(this, 'geolocation').getGeoposition().then(success, error)
-    );
+    get(this, 'geolocation.getPosition').perform().then(success, error);
   }
 });
