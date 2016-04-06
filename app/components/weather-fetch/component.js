@@ -9,19 +9,12 @@ const {
 
 export default Component.extend({
   weather: service(),
-
-  init() {
-    this._super(...arguments);
-    get(this, 'fetch').perform();
-  },
-
+  
   fetch: task(function * () {
-    const xhr = get(this, 'weather').current(
+    let result = yield get(this, 'weather').current(
       get(this, 'latitude'), get(this, 'longitude')
     );
-
-    yield xhr;
-
-    xhr.then((result)=> { this.attrs.success(result); })
-  }).drop()
+    
+    this.attrs.success(result);
+  }).on('init').drop()
 });
