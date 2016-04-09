@@ -11,6 +11,14 @@
     {{#link-to "events-edit" event.id class="table-view-item"}}
       {{event.category}}<br>
 
+      <span class="table-view-item-status">
+        {{#if event.publish}}
+          published
+        {{else}}
+          not published
+        {{/if}}
+      </span>
+
       {{#if event.venue.name}}
         <div class="table-view-item-text-label">{{event.venue.name}}</div>
       {{/if}}

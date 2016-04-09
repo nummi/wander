@@ -4,6 +4,7 @@
 }
 
 .table-view-item {
+  position: relative;
   display: block;
   border-bottom: 1px solid #eee;
   padding: 1rem 1.75rem;
@@ -36,4 +37,12 @@
 .table-view-item-text-label-detail {
   font-size: 1.3rem;
   color: #555;
+}
+
+.table-view-item-status {
+  position: absolute;
+  top: 42%;
+  right: 10px;
+  color: #888;
+  font-size: 1.2rem;
 }

@@ -17,13 +17,14 @@ export default DS.Model.extend({
   category: attr('string'),
   venue: attr(),
   weather: attr(),
+  publish: attr('boolean'),
 
   displayText: computed('venue.name', 'description', function() {
     return get(this, 'venue.name') || get(this, 'description');
   }),
 
   photoThumbnail: computed(function() {
-    return this.get('photo.photo.thumbnail.url');
+    return get(this, 'photo.photo.thumbnail.url');
   }),
 
   iconPath: computed(function() {
