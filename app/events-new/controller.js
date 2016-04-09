@@ -81,8 +81,16 @@ export default Controller.extend({
       set(this, 'model.geolocation', data);
     },
 
+    clearGeolocation() {
+      set(this, 'model.geolocation', null);
+    },
+
     weatherSuccess(data) {
       set(this, 'model.weather', data);
+    },
+
+    clearWeather() {
+      set(this, 'model.weather', null);
     },
 
     save() {

@@ -37,7 +37,10 @@
       {{input value=model.cost}}
 
       {{#geo-location success=(action "geoLocationSuccess")}}
-        <h1 class="section-title">Location</h1>
+        <h1 class="section-title">
+          Location
+          <span {{action "clearGeolocation"}}>&times;</span>
+        </h1>
         <dl>
           <dt>Latitude</dt>
           <dd>{{input value=model.geolocation.latitude}}</dd>
@@ -51,7 +54,10 @@
 
         <button {{action "showSelectVenue"}}>Select Location Name</button>
 
-        <h1 class="section-title">Weather</h1>
+        <h1 class="section-title">
+          Weather
+          <span {{action "clearWeather"}}>&times;</span>
+        </h1>
         {{#weather-fetch latitude=model.geolocation.latitude
                          longitude=model.geolocation.longitude
                          success=(action "weatherSuccess")
