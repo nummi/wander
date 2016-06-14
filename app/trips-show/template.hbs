@@ -13,6 +13,11 @@
   {{#each model.events as |event|}}
     {{#link-to "events-edit" event class="table-view-item"}}
       <div class="table-view-item-text-label">{{event.displayText}}</div>
+      <span class="table-view-item-status">
+        {{#unless event.publish}}
+          not published
+        {{/unless}}
+      </span>
     {{/link-to}}
   {{else}}
     NONE OR LOADING
