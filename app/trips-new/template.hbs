@@ -1,1 +1,28 @@
-NEW
+<div class="screen-view events-edit-screen">
+  <div class="title-bar">
+    <span class="title-bar-button" {{action "cancel"}}>
+      Cancel
+    </span>
+    <div class="title-bar-text">Edit Trip</div>
+    <span class="title-bar-button title-bar-button--default" {{action "save"}}>
+      Save
+    </span>
+  </div>
+
+  <div class="scroll-view below-title-bar">
+    <div style="padding: 0 20px;">
+      {{#if save.isRunning}}
+        {{loading-spinner}}
+      {{/if}}
+
+      <h1 class="section-title">Name</h1>
+      {{input value=model.name class="model-field"}}
+
+      <br><br>
+      <label>
+        {{input type="checkbox" checked=model.commentsDisabled}}
+        Disable Comments
+      </label>
+    </div>
+  </div>
+</div>
