@@ -6,22 +6,19 @@ const {
   run
 } = Ember;
 
-import { categories } from 'wander/categories';
-
 export default Controller.extend({
   confirmDelete: false,
-  categories: categories,
 
   actions: {
     save() {
       get(this, 'model').save().then(() => {
-        this.transitionToRoute('events');
+        this.transitionToRoute('trips-show', get(this, 'model'));
       });
     },
 
     cancel() {
       get(this, 'model').rollbackAttributes();
-      this.transitionToRoute('trips-show', get(this, 'model.trip'));
+      this.transitionToRoute('trips-show', get(this, 'model'));
     },
 
     confirmDelete() {
@@ -33,21 +30,11 @@ export default Controller.extend({
     },
 
     'delete': function() {
-      const event = get(this, 'model');
-      const tripId = event.belongsTo('trip').id();
       set(this, 'confirmDelete', false);
-
-      event.destroyRecord().then(()=> {
-        this.transitionToRoute('trips-show', tripId);
+      get(this, 'model').destroyRecord().then(()=> {
+        this.transitionToRoute('trips');
       });
     },
-
-    categorySelected(category) {
-      set(this, 'model.category', category);
-    },
-
-    changeCreatedAt(newDate) {
-      set(this, 'model.createdAt', newDate);
-    }
   }
 });
+

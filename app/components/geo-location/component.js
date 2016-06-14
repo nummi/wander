@@ -2,9 +2,8 @@ import Ember from 'ember';
 
 const {
   Component,
-  get, set,
-  inject: { service },
-  RSVP
+  get,
+  inject: { service }
 } = Ember;
 
 const PERMISSION_DENIED    = 'User denied the request for geolocation.';
@@ -40,16 +39,16 @@ export default Component.extend({
     const error = function(error) {
       switch(error.code) {
         case error.PERMISSION_DENIED:
-          alert(PERMISSION_DENIED);
+          window.alert(PERMISSION_DENIED);
           break;
         case error.POSITION_UNAVAILABLE:
-          alert(POSITION_UNAVAILABLE);
+          window.alert(POSITION_UNAVAILABLE);
           break;
         case error.TIMEOUT:
-          alert(TIMEOUT);
+          window.alert(TIMEOUT);
           break;
         case error.UNKNOWN_ERROR:
-          alert(UNKNOWN_ERROR);
+          window.alert(UNKNOWN_ERROR);
           break;
       }
     }.bind(this);

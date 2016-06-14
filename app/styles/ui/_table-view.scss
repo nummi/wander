@@ -27,6 +27,12 @@
   }
 }
 
+.table-view-item--action {
+  color: $ios-blue;
+  cursor: pointer;
+  background-color: rgba(113, 181, 255, 0.14);
+}
+
 .table-view-item-text-label {
   margin-bottom: 0.5rem;
   color: #333;

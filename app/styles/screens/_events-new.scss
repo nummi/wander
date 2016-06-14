@@ -1,24 +1,31 @@
 .events-edit-screen,
 .events-new-screen {
-  textarea {
+  .model-field {
     width: 100%;
-    height: 8rem;
     border: 1px solid #ddd;
     border-top: 0;
-    padding: 0.5rem;
     font-size: 1.3rem;
+    padding: 0.5rem;
   }
 
-  input {
-    width: 100%;
-    border: 1px solid #ddd;
-    border-top: 0;
-    padding: 0.5rem;
-    font-size: 1.3rem;
+  textarea.model-field {
+    height: 8rem;
   }
 
   input[type=checkbox] {
     display: inline-block;
     width: auto;
   }
+}
+
+.flatpickr-wrapper.open .flatpickr-calendar {
+  font-size: 1.3rem;
+}
+
+.flatpickr-wrapper .flatpickr-calendar .flatpickr-months {
+  margin-bottom: 0.5rem;
+}
+
+.flatpickr-wrapper input {
+  font-size: 1.3rem;
 }

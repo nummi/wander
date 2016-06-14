@@ -12,11 +12,11 @@
   <div class="scroll-view below-title-bar">
     <div style="padding: 0 20px;">
       <h1 class="section-title">Description</h1>
-      {{textarea value=model.description}}
+      {{textarea value=model.description class="model-field"}}
 
       <br><br>
       <h1 class="section-title">Cost</h1>
-      {{input value=model.cost}}
+      {{input value=model.cost class="model-field"}}
 
       <br><br>
       <h1 class="section-title">Category</h1>
@@ -53,11 +53,11 @@
       <h1 class="section-title">Location</h1>
       <dl>
         <dt>Latitude</dt>
-        <dd>{{input value=model.geolocation.latitude}}</dd>
+        <dd>{{input value=model.geolocation.latitude class="model-field"}}</dd>
         <dt>Longitude</dt>
-        <dd>{{input value=model.geolocation.longitude}}</dd>
+        <dd>{{input value=model.geolocation.longitude class="model-field"}}</dd>
         {{#if model.venue}}
-          <dt>Location name</dt> <dd>{{input value=model.venue.name}}</dd>
+          <dt>Location name</dt> <dd>{{input value=model.venue.name class="model-field"}}</dd>
         {{/if}}
       </dl>
 
@@ -66,6 +66,24 @@
         {{input type="checkbox" checked=model.publish}}
         Publish
       </label>
+      <br><br>
+      <label>
+        {{input type="checkbox" checked=model.commentsDisabled}}
+        Disabled Comments
+      </label>
+
+      <h1 class="section-title">Created At</h1>
+      {{ember-flatpickr altInput=true
+                        altFormat="M d Y"
+                        dateFormat="M/D/Y"
+                        enableTime=true
+                        timeFormat="H:i"
+                        hourIncrement=1
+                        minDate=minDate
+                        minuteIncrement=5
+                        onChangeAction="changeCreatedAt"
+                        value=model.createdAt
+                        class="model-field"}}
     </div>
 
     <br><br><br>

@@ -3,7 +3,7 @@ import { task } from 'ember-concurrency';
 
 const {
   Component,
-  get, set,
+  get,
   inject: { service },
 } = Ember;
 
@@ -22,6 +22,6 @@ export default Component.extend({
 
     yield xhr;
 
-    xhr.then((result)=> { this.attrs.success(result); })
+    xhr.then((result)=> { this.attrs.success(result); });
   }).drop()
 });

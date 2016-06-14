@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-const { attr } = DS;
+const { attr, belongsTo } = DS;
 const {
   computed,
   get,
@@ -9,6 +9,9 @@ const {
 } = Ember;
 
 export default DS.Model.extend({
+  trip: belongsTo('trip'),
+
+  commentsDisabled: attr('boolean'),
   cost: attr('dollars', { defaultValue: 0 }),
   createdAt: attr('date'),
   description: attr('string'),

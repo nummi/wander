@@ -1,0 +1,20 @@
+<div class="title-bar">
+  {{link-to "< Back" "trips" class="title-bar-button"}}
+  <div class="title-bar-text">{{model.name}}</div>
+  {{#link-to "trips-edit" model class="title-bar-button"}}
+    Edit
+  {{/link-to}}
+</div>
+
+<div class="table-view scroll-view below-title-bar animation-fade-in">
+  {{#link-to "events-new" class="table-view-item table-view-item--action"}}
+    + New Event
+  {{/link-to}}
+  {{#each model.events as |event|}}
+    {{#link-to "events-edit" event class="table-view-item"}}
+      <div class="table-view-item-text-label">{{event.displayText}}</div>
+    {{/link-to}}
+  {{else}}
+    NONE OR LOADING
+  {{/each}}
+</div>

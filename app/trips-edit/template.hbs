@@ -1,0 +1,25 @@
+<div class="screen-view events-edit-screen">
+  <div class="title-bar">
+    <span class="title-bar-button" {{action "cancel"}}>
+      Cancel
+    </span>
+    <div class="title-bar-text">Edit Trip</div>
+    <span class="title-bar-button title-bar-button--default" {{action "save"}}>
+      Save
+    </span>
+  </div>
+
+  <div class="scroll-view below-title-bar">
+    <div style="padding: 0 20px;">
+      <h1 class="section-title">Name</h1>
+      {{input value=model.name class="model-field"}}
+    </div>
+
+    <br><br><br>
+
+    <button class="delete-button" {{action "confirmDelete"}}>Delete this Trip</button>
+    {{#if confirmDelete}}
+      <button class="delete-button" {{action "delete"}}>Seriously, delete this Trip and all its data</button>
+    {{/if}}
+  </div>
+</div>

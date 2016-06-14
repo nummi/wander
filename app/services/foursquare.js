@@ -4,7 +4,7 @@ import ENV from 'wander/config/environment';
 import payload from 'wander/foursquare-payload';
 
 const {
-  get, set, setProperties,
+  get, setProperties,
   inject: { service },
   isEmpty,
   RSVP,
@@ -33,7 +33,7 @@ export default Service.extend({
       client_secret: get(this, 'clientSecret'),
       v: moment().format('YYYYMMDD'),
       sortByDistance: 1
-    }
+    };
   },
 
   venues(lat, lng, name) {

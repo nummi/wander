@@ -11,13 +11,16 @@ import readFile from 'wander/lib/read-file';
 const {
   Controller,
   get, set,
-  inject: { service },
-  run
+  inject,
+  inject: { service }
 } = Ember;
 
 export default Controller.extend({
+  tripsController: inject.controller('trips-show'),
   exif: service(),
   selectVenue: false,
+
+  trip: Ember.computed.alias('tripsController.model'),
 
   file: null,
   uploader: null,
@@ -25,13 +28,15 @@ export default Controller.extend({
   categories: categories,
 
   save: task(function * () {
-    const promise = this.store.createRecord('event', get(this, 'model'))
-                              .save();
+    const event = this.store.createRecord('event', get(this, 'model'));
+    set(event, 'trip', get(this, 'trip'));
+
+    const promise = event.save();
 
     yield promise;
 
     promise.then(()=> {
-      this.transitionToRoute('events');
+      this.transitionToRoute('trips-show', get(this, 'trip'));
     });
   }).drop(),
 
@@ -107,22 +112,6 @@ export default Controller.extend({
 
     categorySelected(category) {
       set(this, 'model.category', category);
-    },
-
-    // old s3 uploader
-    // fileAdded(file, uploader) {
-    //   set(this, 'file', file);
-    //   set(this, 'uploader', uploader);
-    //
-    //   this.getLatAndLngWithFile(file);
-    // },
-    // uploadProgress(data) {
-    // },
-    // uploadFinished(uploadedUrl, data) {
-    // },
-    // uploadFailed(error) {
-    //   console.log('upload failed');
-    //   console.log(error);
-    // }
+    }
   }
 });

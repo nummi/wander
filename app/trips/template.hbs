@@ -1,0 +1,15 @@
+<div class="title-bar">
+  {{#link-to "trips-new" class="title-bar-button"}}
+    {{partial "svg/plus"}}
+  {{/link-to}}
+
+  <div class="title-bar-text">Trips</div>
+</div>
+
+<div class="table-view scroll-view below-title-bar animation-fade-in">
+  {{#each model as |trip|}}
+    {{#link-to 'trips-show' trip class="table-view-item"}}
+      <div class="table-view-item-text-label">{{trip.name}}</div>
+    {{/link-to}}
+  {{/each}}
+</div>

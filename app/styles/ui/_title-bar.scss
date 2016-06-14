@@ -38,6 +38,12 @@
   }
 }
 
+.title-bar-button--right {
+  svg {
+    right: 13px;
+  }
+}
+
 .title-bar-button--default {
   font-weight: bold;
 }
