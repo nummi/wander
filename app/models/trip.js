@@ -8,4 +8,5 @@ export default DS.Model.extend({
   commentsDisabled: attr('boolean'),
   createdAt: attr('date'),
   name: attr('string'),
+  shortName: attr('string')
 });

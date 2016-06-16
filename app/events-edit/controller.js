@@ -15,7 +15,7 @@ export default Controller.extend({
   actions: {
     save() {
       get(this, 'model').save().then(() => {
-        this.transitionToRoute('events');
+        this.transitionToRoute('trips-show', get(this, 'model.trip'));
       });
     },
 
