@@ -29,16 +29,16 @@
 
       <h1 class="section-title">Start Date</h1>
       {{ember-flatpickr altInput=true
-                        altFormat="M d Y"
-                        dateFormat="M/D/Y"
+                        altFormat="Y-m-d"
+                        dateFormat="Y-m-d"
                         onChangeAction="changeStartDate"
                         value=model.startDate
                         class="model-field"}}
 
       <h1 class="section-title">End Date</h1>
       {{ember-flatpickr altInput=true
-                        altFormat="M d Y"
-                        dateFormat="M/D/Y"
+                        altFormat="Y-m-d"
+                        dateFormat="Y-m-d"
                         onChangeAction="changeEndDate"
                         value=model.endDate
                         class="model-field"}}
