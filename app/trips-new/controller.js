@@ -1,11 +1,12 @@
 import Ember from 'ember';
 
-import { task } from 'ember-concurrency';
-
 const {
   Controller,
-  get
+  get, set
 } = Ember;
+
+import { task } from 'ember-concurrency';
+import slugify from 'wander/lib/slugify';
 
 export default Controller.extend({
   save: task(function * () {
@@ -20,6 +21,18 @@ export default Controller.extend({
   }),
 
   actions: {
+    nameChanged() {
+      set(this, 'model.shortName', slugify(get(this, 'model.name')));
+    },
+
+    changeStartDate(newDate) {
+      set(this, 'model.startDate', newDate);
+    },
+
+    changeEndDate(newDate) {
+      set(this, 'model.endDate', newDate);
+    },
+
     save() {
       const saveTask = get(this, 'save');
 
@@ -29,7 +42,7 @@ export default Controller.extend({
     },
 
     cancel() {
-
+      this.transitionToRoute('trips');
     }
   }
 });

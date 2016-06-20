@@ -3,7 +3,7 @@
     <span class="title-bar-button" {{action "cancel"}}>
       Cancel
     </span>
-    <div class="title-bar-text">Edit Trip</div>
+    <div class="title-bar-text">New Trip</div>
     <span class="title-bar-button title-bar-button--default" {{action "save"}}>
       Save
     </span>
@@ -16,7 +16,26 @@
       {{/if}}
 
       <h1 class="section-title">Name</h1>
-      {{input value=model.name class="model-field"}}
+      {{input value=model.name class="model-field" key-up="nameChanged"}}
+
+      <h1 class="section-title">Short Name</h1>
+      {{input value=model.shortName class="model-field"}}
+
+      <h1 class="section-title">Start Date</h1>
+      {{ember-flatpickr altInput=true
+                        altFormat="M d Y"
+                        dateFormat="M/D/Y"
+                        onChangeAction="changeStartDate"
+                        value=model.startDate
+                        class="model-field"}}
+
+      <h1 class="section-title">End Date</h1>
+      {{ember-flatpickr altInput=true
+                        altFormat="M d Y"
+                        dateFormat="M/D/Y"
+                        onChangeAction="changeEndDate"
+                        value=model.endDate
+                        class="model-field"}}
 
       <br><br>
       <label>
