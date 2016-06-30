@@ -10,7 +10,7 @@
   {{#link-to "events-new" class="table-view-item table-view-item--action"}}
     + New Event
   {{/link-to}}
-  {{#each model.events as |event|}}
+  {{#each sortedEvents as |event|}}
     {{#link-to "events-edit" event class="table-view-item"}}
       <div class="table-view-item-text-label">{{event.displayText}}</div>
       <span class="table-view-item-status">
