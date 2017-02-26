@@ -7,15 +7,16 @@ module.exports = function(defaults) {
     'ember-cli-qunit': {
       useLintTree: false
     },
+    'ember-cli-babel': {
+      includePolyfill: true
+    },
     sourcemaps: {
       enabled: true,
       extensions: ['js']
     },
     babel: {
-      optional: ['es7.decorators'],
-      includePolyfill: true
+      optional: ['es7.decorators']
     }
-    // Add options here
   });
 
   app.import(app.bowerDirectory + '/moment/moment.js');

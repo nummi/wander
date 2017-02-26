@@ -4,12 +4,16 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'wander',
     environment: environment,
-    baseURL: '/',
+    rootURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
+      },
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
       }
     },
 
@@ -55,7 +59,8 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.host = 'http://localhost:3000';
+    ENV.host = 'http://wander-server.herokuapp.com';
+    //ENV.host = 'http://localhost:3000';
 
     if(Error && Error.stackTraceLimit) {
       Error.stackTraceLimit = 50;
@@ -70,7 +75,7 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.baseURL = '/';
+    ENV.rootURL = '/';
     ENV.locationType = 'none';
 
     ENV['ember-cli-mirage'] = {
